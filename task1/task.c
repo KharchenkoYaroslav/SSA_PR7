@@ -1,25 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main()
-{
-    FILE *fp = popen("rwho | more", "r"); 
-    if (fp == NULL)
-    {
+int main() {
+    FILE *fp = popen("more", "w");  
+    if (fp == NULL) {
         perror("popen failed");
         return 1;
     }
-    else
-    {
-        printf("popen succeeded\n");
+
+    FILE *rwho_fp = popen("who", "r");//rwho замінено на who, оскільки rwho нічого не виводить
+    if (rwho_fp == NULL) {
+        perror("popen rwho failed");
+        pclose(fp);
+        return 1;
     }
 
     char buffer[256];
-    while (fgets(buffer, sizeof(buffer), fp))
-    {
-        fputs(buffer, stdout);
+    while (fgets(buffer, sizeof(buffer), rwho_fp)) {
+        fputs(buffer, fp);  
     }
 
-    pclose(fp);
+    pclose(rwho_fp); 
+    pclose(fp);       
     return 0;
 }
