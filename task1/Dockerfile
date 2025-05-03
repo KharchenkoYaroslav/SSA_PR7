@@ -9,6 +9,7 @@ WORKDIR /app
 # Встановлюємо необхідні пакети: gcc, rwho, more (через util-linux)
 RUN apt-get update && apt-get install -y \
     gcc \
+    rwho \
     util-linux \
     && rm -rf /var/lib/apt/lists/*
 

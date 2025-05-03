@@ -8,7 +8,7 @@ int main() {
         return 1;
     }
 
-    FILE *rwho_fp = popen("who", "r");//rwho замінено на who, оскільки rwho нічого не виводить
+    FILE *rwho_fp = popen("rwho", "r");
     if (rwho_fp == NULL) {
         perror("popen rwho failed");
         pclose(fp);
